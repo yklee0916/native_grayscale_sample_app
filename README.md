@@ -1,29 +1,28 @@
 # Native Grayscale Sample App
 
-A native iOS sample application demonstrating grayscale image conversion using the `FlutterGrayscaleSDK`. This app shows how to use Flutter plugins in a native iOS app through the SDK bridge.
+A native iOS sample application demonstrating how to use Flutter plugins (`flutter_grayscale`, `flutter_log`) in a native iOS app through the `NativeGrayscaleSDK`. This app is the native equivalent of `flutter_grayscale_sample_app`, showing how to access Flutter plugin functionality via Swift Package Manager.
 
 ## Features
 
 - Select images from photo library (iOS)
-- Convert selected images to grayscale using Flutter logic
+- Convert selected images to grayscale using Flutter plugin logic
 - Real-time preview of original and converted images
 - Error handling and logging
-- Flutter plugin integration in native app
+- Flutter plugin integration in native app via SDK
 
 ## Requirements
 
 - Xcode 14.0+
 - iOS 13.0+
 - Swift 5.0+
-- CocoaPods
 
 ## Dependencies
 
 This app uses the following:
 
-- `FlutterGrayscaleSDK` - SDK that bridges Flutter plugins to native iOS
-- `flutter_grayscale` - CoreImage-based grayscale conversion plugin (via SDK)
-- `flutter_log` - Logging utility (via SDK)
+- `NativeGrayscaleSDK` - SDK that bridges Flutter plugins to native iOS (via Swift Package Manager)
+  - `flutter_grayscale` - CoreImage-based grayscale conversion plugin (via SDK)
+  - `flutter_log` - Logging utility (via SDK)
 
 ## Getting Started
 
@@ -33,19 +32,14 @@ git clone https://github.com/yklee0916/native_grayscale_sample_app.git
 cd native_grayscale_sample_app
 ```
 
-2. Install CocoaPods dependencies:
+2. Open the project in Xcode:
 ```bash
-cd ios
-pod install
-cd ..
+open NativeGrayscaleSample.xcodeproj
 ```
 
-3. Open the workspace:
-```bash
-open ios/NativeGrayscaleSample.xcworkspace
-```
+3. Build and run the app in Xcode
 
-4. Build and run the app in Xcode
+The SDK dependency will be automatically resolved via Swift Package Manager.
 
 ## Project Structure
 
@@ -56,96 +50,19 @@ NativeGrayscaleSample/
 ├── views/
 │   └── ContentView.swift          # Main UI view
 ├── viewmodels/
-│   └── GrayscaleViewModel.swift   # Business logic and state management
+│   └── GrayscaleViewModel.swift  # Business logic and state management
 └── listeners/
-    └── ConsoleLogListener.swift    # Log listener implementation
+    └── ConsoleLogListener.swift  # Log listener implementation
 ```
 
 ## Architecture
 
-The app follows the MVVM (Model-View-ViewModel) pattern and integrates with Flutter plugins through the SDK:
+The app follows the MVVM (Model-View-ViewModel) pattern:
 
-### Architecture Diagram
-```
-┌────────────────────────────────────────────────────────────┐
-│                    Native iOS App (SwiftUI)                │
-├────────────────────────────────────────────────────────────┤
-│  ┌──────────────┐    ┌──────────────────┐                  │
-│  │   ContentView│───▶│GrayscaleViewModel│                  │
-│  │   (View)     │    │  (ViewModel)     │                  │
-│  └──────────────┘    └────────┬─────────┘                  │
-│                               ▼                            │
-│                    ┌──────────────────────┐                │
-│                    │  FlutterGrayscaleSDK │                │
-│                    │  (SDK Bridge Layer)  │                │
-│                    └──────────┬───────────┘                │
-│                    ┌──────────┴───────────┐                │
-│                    ▼                      ▼                │
-│          ┌─────────────────┐   ┌─────────────────┐         │
-│          │ Flutter Engine  │   │ Method Channels │         │
-│          │                 │   │                 │         │
-│          │  - Image Channel│   │  - Log Channel  │         │
-│          └────────┬────────┘   └────────┬────────┘         │
-└───────────────────┼─────────────────────┼──────────────────┘
-                    ▼                     ▼
-┌────────────────────────────────────────────────────────────┐
-│              Flutter Module (flutter_grayscale_sdk)        │
-├────────────────────────────────────────────────────────────┤
-│          ┌──────────────────┐    ┌──────────────────┐      │
-│          │ImageMethodChannel│    │ LogMethodChannel │      │
-│          └────────┬─────────┘    └────────┬─────────┘      │
-│                   ▼                       ▼                │
-│          ┌──────────────────┐    ┌──────────────────┐      │
-│          │ flutter_grayscale│    │   flutter_log    │      │
-│          │    (Plugin)      │    │     (Plugin)     │      │
-│          └──────────────────┘    └──────────────────┘      │
-│          ┌──────────────────────────────────────────┐      │
-│          │     Native Platform Implementation       │      │
-│          │ (iOS: CoreImage, macOS: AppKit/CoreImage)│      │
-│          └──────────────────────────────────────────┘      │
-└────────────────────────────────────────────────────────────┘
-```
-
-### Component Description
-
-1. **View Layer** (`ContentView`)
-   - SwiftUI-based UI components
-   - Displays original and converted images
-   - User interaction handling
-
-2. **ViewModel Layer** (`GrayscaleViewModel`)
-   - Business logic and state management
-   - Communicates with FlutterGrayscaleSDK
-   - Handles image selection and conversion requests
-
-3. **SDK Bridge Layer** (`FlutterGrayscaleSDK`)
-   - Initializes and manages Flutter Engine
-   - Creates Method Channels for communication
-   - Bridges native Swift code with Flutter Dart code
-
-4. **Flutter Module** (`flutter_grayscale_sdk`)
-   - Contains Flutter plugins (`flutter_grayscale`, `flutter_log`)
-   - Handles method channel calls from native side
-   - Executes Flutter plugin logic
-
-5. **Native Platform Implementation**
-   - iOS: Uses CoreImage for grayscale conversion
-   - macOS: Uses AppKit and CoreImage for grayscale conversion
-
-### How It Works
-
-1. **SDK Initialization**: When the app launches, `FlutterGrayscaleSDK` initializes a Flutter Engine and sets up Method Channels.
-
-2. **Method Channel Communication**: 
-   - Native app calls SDK methods (e.g., `convertToGrayscale`)
-   - SDK sends requests through Method Channels to Flutter module
-   - Flutter module processes requests using Flutter plugins
-   - Results are returned back through Method Channels
-
-3. **Plugin Execution**: 
-   - Flutter plugins (`flutter_grayscale`, `flutter_log`) execute their logic
-   - Platform-specific implementations (iOS/macOS) are called
-   - Results are returned to the native app
+- **View**: `ContentView` - UI components and layout
+- **ViewModel**: `GrayscaleViewModel` - Business logic, state management, and SDK integration
+- **SDK**: `NativeGrayscaleSDK` - Bridges Flutter plugins to native code
+- **Model**: Handled by Flutter plugins (`flutter_grayscale`, `flutter_log`) via SDK
 
 ## Usage
 
@@ -157,19 +74,19 @@ The app follows the MVVM (Model-View-ViewModel) pattern and integrates with Flut
 
 ## SDK Integration
 
-The app uses `FlutterGrayscaleSDK` to access Flutter plugins from native code:
+The app uses `NativeGrayscaleSDK` (via Swift Package Manager) to access Flutter plugins:
 
 ```swift
-import FlutterGrayscaleSDK
+import NativeGrayscaleSDK
 
 // Initialize SDK
-FlutterGrayscaleSDK.shared.initialize { success in
+GrayscaleSDK.shared.initialize { success in
     if success {
         // Set log interceptor
-        FlutterGrayscaleSDK.shared.setLogInterceptor(ConsoleLogListener())
+        GrayscaleSDK.shared.setLogInterceptor(ConsoleLogListener())
         
         // Convert image to grayscale
-        FlutterGrayscaleSDK.shared.convertToGrayscale(imagePath: path) { result in
+        GrayscaleSDK.shared.convertToGrayscale(imagePath: path) { result in
             switch result {
             case .success(let outputPath):
                 print("Success: \(outputPath)")
@@ -188,10 +105,6 @@ FlutterGrayscaleSDK.shared.initialize { success in
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Author
 

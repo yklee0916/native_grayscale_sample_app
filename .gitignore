@@ -1,0 +1,52 @@
+# Xcode
+.DS_Store
+*.xccheckout
+*.xcuserstate
+*.xcuserdatad
+*.xcworkspace/xcuserdata/
+*.xcworkspace/xcshareddata/swiftpm/
+build/
+DerivedData/
+
+# Swift Package Manager
+.swiftpm/
+.build/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+
+# CocoaPods
+Pods/
+*.xcworkspace
+!*.xcworkspace/contents.xcworkspacedata
+Podfile.lock
+
+# macOS
+.AppleDouble
+.LSOverride
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Build artifacts
+*.ipa
+*.dSYM.zip
+*.app.dSYM
+
+# Xcode build settings
+*.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
