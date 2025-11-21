@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02F2B4972EC5B4710011C141 /* NativeGrayscalePackage in Frameworks */ = {isa = PBXBuildFile; productRef = 02F2B4962EC5B4710011C141 /* NativeGrayscalePackage */; };
+		02975CDE2ED01E820011BB4C /* Toasts in Frameworks */ = {isa = PBXBuildFile; productRef = 02975CDD2ED01E820011BB4C /* Toasts */; };
+		02EEC2652ED020CC00C5B55A /* NativeGrayscalePackage in Frameworks */ = {isa = PBXBuildFile; productRef = 02EEC2642ED020CC00C5B55A /* NativeGrayscalePackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,7 +29,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		02F2B4942EC5B4350011C141 /* Exceptions for "NativeGrayscaleSample" folder in "NativeGrayscaleSample" target */ = {
+		02975D152ED020320011BB4C /* Exceptions for "NativeGrayscaleSample" folder in "NativeGrayscaleSample" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -41,7 +42,7 @@
 		02813FA22EC1BC0600172149 /* NativeGrayscaleSample */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				02F2B4942EC5B4350011C141 /* Exceptions for "NativeGrayscaleSample" folder in "NativeGrayscaleSample" target */,
+				02975D152ED020320011BB4C /* Exceptions for "NativeGrayscaleSample" folder in "NativeGrayscaleSample" target */,
 			);
 			path = NativeGrayscaleSample;
 			sourceTree = "<group>";
@@ -53,7 +54,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02F2B4972EC5B4710011C141 /* NativeGrayscalePackage in Frameworks */,
+				02EEC2652ED020CC00C5B55A /* NativeGrayscalePackage in Frameworks */,
+				02975CDE2ED01E820011BB4C /* Toasts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +135,8 @@
 			mainGroup = 02813F972EC1BC0600172149;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				02F2B4952EC5B4710011C141 /* XCRemoteSwiftPackageReference "native_grayscale_sdk" */,
+				02975CDC2ED01E820011BB4C /* XCRemoteSwiftPackageReference "swiftui-toasts" */,
+				02EEC2632ED020CC00C5B55A /* XCRemoteSwiftPackageReference "native_grayscale_sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 02813FA12EC1BC0600172149 /* Products */;
@@ -389,20 +392,33 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		02F2B4952EC5B4710011C141 /* XCRemoteSwiftPackageReference "native_grayscale_sdk" */ = {
+		02975CDC2ED01E820011BB4C /* XCRemoteSwiftPackageReference "swiftui-toasts" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/yklee0916/native_grayscale_sdk.git";
+			repositoryURL = "https://github.com/sunghyun-k/swiftui-toasts.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.0.0;
+				version = 1.1.1;
+			};
+		};
+		02EEC2632ED020CC00C5B55A /* XCRemoteSwiftPackageReference "native_grayscale_sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yklee0916/native_grayscale_sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 1.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		02F2B4962EC5B4710011C141 /* NativeGrayscalePackage */ = {
+		02975CDD2ED01E820011BB4C /* Toasts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 02F2B4952EC5B4710011C141 /* XCRemoteSwiftPackageReference "native_grayscale_sdk" */;
+			package = 02975CDC2ED01E820011BB4C /* XCRemoteSwiftPackageReference "swiftui-toasts" */;
+			productName = Toasts;
+		};
+		02EEC2642ED020CC00C5B55A /* NativeGrayscalePackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02EEC2632ED020CC00C5B55A /* XCRemoteSwiftPackageReference "native_grayscale_sdk" */;
 			productName = NativeGrayscalePackage;
 		};
 /* End XCSwiftPackageProductDependency section */
